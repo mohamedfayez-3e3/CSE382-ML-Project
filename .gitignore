@@ -6,9 +6,5 @@ venv/
 .env
 .vscode/
 
-outputs/
-artifacts/
 *.joblib
 *.pkl
-
-H2.csv
