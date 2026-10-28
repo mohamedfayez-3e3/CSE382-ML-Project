@@ -1,0 +1,4 @@
+DepositType,mean,count,cancellation_rate
+No Deposit     ,0.30468679449745645,66442,30.468679449745643
+Non Refund     ,0.9981349082996581,12868,99.81349082996582
+Refundable     ,0.7,20,70.0

@@ -1,0 +1,106 @@
+DATASET AUDIT REPORT
+====================
+Rows: 79330
+Columns: 31
+Duplicate rows: 25902
+
+COLUMN SUMMARY
+                     column   dtype  lost_count  lost_percent
+                 IsCanceled   int64           0      0.000000
+                   LeadTime   int64           0      0.000000
+            ArrivalDateYear   int64           0      0.000000
+           ArrivalDateMonth     str           0      0.000000
+      ArrivalDateWeekNumber   int64           0      0.000000
+      ArrivalDateDayOfMonth   int64           0      0.000000
+       StaysInWeekendNights   int64           0      0.000000
+          StaysInWeekNights   int64           0      0.000000
+                     Adults   int64           0      0.000000
+                   Children float64           4      0.005042
+                     Babies   int64           0      0.000000
+                       Meal     str           0      0.000000
+                    Country     str          24      0.030253
+              MarketSegment     str           0      0.000000
+        DistributionChannel     str           0      0.000000
+            IsRepeatedGuest   int64           0      0.000000
+      PreviousCancellations   int64           0      0.000000
+PreviousBookingsNotCanceled   int64           0      0.000000
+           ReservedRoomType     str           0      0.000000
+           AssignedRoomType     str           0      0.000000
+             BookingChanges   int64           0      0.000000
+                DepositType     str           0      0.000000
+                      Agent     str           0      0.000000
+                    Company     str           0      0.000000
+          DaysInWaitingList   int64           0      0.000000
+               CustomerType     str           0      0.000000
+                        ADR float64           0      0.000000
+   RequiredCarParkingSpaces   int64           0      0.000000
+     TotalOfSpecialRequests   int64           0      0.000000
+          ReservationStatus     str           0      0.000000
+      ReservationStatusDate     str           0      0.000000
+
+LOST DATA
+                             lost_count  lost_percent
+Country                              24      0.030253
+Children                              4      0.005042
+IsCanceled                            0      0.000000
+ArrivalDateMonth                      0      0.000000
+ArrivalDateWeekNumber                 0      0.000000
+LeadTime                              0      0.000000
+ArrivalDateYear                       0      0.000000
+StaysInWeekendNights                  0      0.000000
+ArrivalDateDayOfMonth                 0      0.000000
+Adults                                0      0.000000
+StaysInWeekNights                     0      0.000000
+Babies                                0      0.000000
+Meal                                  0      0.000000
+MarketSegment                         0      0.000000
+DistributionChannel                   0      0.000000
+IsRepeatedGuest                       0      0.000000
+PreviousCancellations                 0      0.000000
+PreviousBookingsNotCanceled           0      0.000000
+ReservedRoomType                      0      0.000000
+AssignedRoomType                      0      0.000000
+BookingChanges                        0      0.000000
+DepositType                           0      0.000000
+Agent                                 0      0.000000
+Company                               0      0.000000
+DaysInWaitingList                     0      0.000000
+CustomerType                          0      0.000000
+ADR                                   0      0.000000
+RequiredCarParkingSpaces              0      0.000000
+TotalOfSpecialRequests                0      0.000000
+ReservationStatus                     0      0.000000
+ReservationStatusDate                 0      0.000000
+
+NUMERICAL SUMMARY
+         IsCanceled      LeadTime  ArrivalDateYear  ArrivalDateWeekNumber  ArrivalDateDayOfMonth  StaysInWeekendNights  StaysInWeekNights        Adults      Children        Babies  IsRepeatedGuest  PreviousCancellations  PreviousBookingsNotCanceled  BookingChanges  DaysInWaitingList           ADR  RequiredCarParkingSpaces  TotalOfSpecialRequests
+count  79330.000000  79330.000000     79330.000000           79330.000000           79330.000000          79330.000000       79330.000000  79330.000000  79326.000000  79330.000000     79330.000000           79330.000000                 79330.000000    79330.000000       79330.000000  79330.000000              79330.000000            79330.000000
+mean       0.417270    109.735724      2016.174285              27.177449              15.786625              0.795185           2.182957      1.850977      0.091370      0.004941         0.025615               0.079743                     0.132371        0.187369           3.226774    105.304465                  0.024367                0.546918
+std        0.493111    110.948526         0.699181              13.398523               8.728451              0.885026           1.456416      0.509292      0.372177      0.084323         0.157983               0.415472                     1.693411        0.608620          20.870890     43.602954                  0.154919                0.780776
+min        0.000000      0.000000      2015.000000               1.000000               1.000000              0.000000           0.000000      0.000000      0.000000      0.000000         0.000000               0.000000                     0.000000        0.000000           0.000000      0.000000                  0.000000                0.000000
+25%        0.000000     23.000000      2016.000000              17.000000               8.000000              0.000000           1.000000      2.000000      0.000000      0.000000         0.000000               0.000000                     0.000000        0.000000           0.000000     79.200000                  0.000000                0.000000
+50%        0.000000     74.000000      2016.000000              27.000000              16.000000              1.000000           2.000000      2.000000      0.000000      0.000000         0.000000               0.000000                     0.000000        0.000000           0.000000     99.900000                  0.000000                0.000000
+75%        1.000000    163.000000      2017.000000              38.000000              23.000000              2.000000           3.000000      2.000000      0.000000      0.000000         0.000000               0.000000                     0.000000        0.000000           0.000000    126.000000                  0.000000                1.000000
+max        1.000000    629.000000      2017.000000              53.000000              31.000000             16.000000          41.000000      4.000000      3.000000     10.000000         1.000000              21.000000                    72.000000       21.000000         391.000000   5400.000000                  3.000000                5.000000
+
+CATEGORICAL SUMMARY
+       ArrivalDateMonth       Meal Country MarketSegment DistributionChannel  ReservedRoomType  AssignedRoomType      DepositType        Agent      Company CustomerType ReservationStatus ReservationStatusDate
+count             79330      79330   79306         79330               79330             79330             79330            79330        79330        79330        79330             79330                 79330
+unique               12          4     166             8                   5                 8                 9                3          224          208            4                 3                   864
+top              August  BB            PRT     Online TA               TA/TO  A                 A                 No Deposit                 9         NULL    Transient         Check-Out            2015-10-21
+freq               8983      62305   30960         38748               68945             62595             57007            66442        31955        75641        59404             46228                  1416
+
+UNUSUAL VALUES
+Negative ADR           0
+Negative LeadTime      0
+Negative Adults        0
+Negative Children      0
+Negative Babies        0
+Zero Guests          167
+ADR Above 1000         1
+
+IS CANCELED DISTRIBUTION
+            count    percent
+IsCanceled                  
+0           46228  58.273037
+1           33102  41.726963
