@@ -1,0 +1,4 @@
+paths:
+  dataset: data/H2.csv
+seed:
+  100
