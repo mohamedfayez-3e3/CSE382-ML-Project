@@ -20,3 +20,14 @@ python -m pip install -r requirements.txt
 - **ADR:** The distribution is concentrated mainly between approximately 60 and 150. One value above 1,000 requires further inspection.
 - **Potentially Unusual Records:** 167 records have zero adults, children, and babies. These records require investigation.
 - **Next Steps:** Investigate duplicates and unusual records, analyze relationships between cancellation and selected features, assess leakage risks, and define preprocessing and data-splitting strategies.
+
+## Preprocessing
+
+- All data preparation lives in `src/preprocessing/preprocessing.py`, and all settings live in `config.yaml` (paths, seed, split size, cleaning thresholds, and the feature lists per task).
+
+- To get data for a task, call `get_preprocessing_data(Task.<task>)`.
+- To get the pipeline for a task, call `build_preprocessor(Task.<task>`.
+
+- Your edits should be one of the two:
+  - edit the features in config.yaml
+  - change your `build_<task>_preprocessor()` in `preprocessing.py`
