@@ -1,4 +1,21 @@
 paths:
   dataset: data/H2.csv
-seed:
-  100
+seed: 100
+split:
+  test_size: 0.2
+features:
+  regression:
+    target: null
+    numerical: []
+    categorical: []
+    drop: []
+  classification:
+    target: null
+    numerical: []
+    categorical: []
+    drop: []
+  clustering:
+    target: null
+    numerical: []
+    categorical: []
+    drop: []
