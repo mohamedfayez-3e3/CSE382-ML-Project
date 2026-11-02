@@ -8,14 +8,11 @@ features:
     target: null
     numerical: []
     categorical: []
-    drop: []
   classification:
     target: null
     numerical: []
     categorical: []
-    drop: []
   clustering:
     target: null
     numerical: []
     categorical: []
-    drop: []
