@@ -1,35 +1,30 @@
-from pathlib import Path
-import yaml
 import pandas as pd
-from enum import Enum
+from src.config import ROOT, load_config, Task
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, FunctionTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
 
-# should be moved i guess from here
-ROOT = Path(__file__).resolve().parents[2]
-def load_config():
-    with open(ROOT / "config.yaml") as f:
-        return yaml.safe_load(f)
-
-class Task(str, Enum):
-    REGRESSION = "regression"
-    CLASSIFICATION = "classification"
-    CLUSTERING = "clustering"
-
-def load_data(path):
+def load_data(path) -> pd.DataFrame:
     """Reads dataframe from the dataset."""
     df = pd.read_csv(path, na_values=["NULL"])
     return df
 
-def clean_rows(df: pd.DataFrame):
+def clean_rows(df: pd.DataFrame) -> pd.DataFrame:
     """Deletes useless/harmful rows."""
     df = df.copy() # safety first
+
+    # NAs
+    df["Children"] = (df["Children"].fillna(0)).astype("int64")
+    df["Country"] = df["Country"].fillna("Unknown")
+
+    # duplicates
+    # df = df.drop_duplicates() # idk what i should do with them
+
     return df
 
-def add_features(df: pd.DataFrame):
+def add_features(df: pd.DataFrame) -> pd.DataFrame:
     """Adds extra features to use."""
     df = df.copy() # safety first
     return df
@@ -95,18 +90,16 @@ def build_clustering_preprocessor(cfg, scale: bool = True) -> ColumnTransformer:
         remainder="drop",
     )
 
-def build_preprocessor(task: Task):
+def build_preprocessor(task: Task) -> ColumnTransformer:
     """Returns a pipeline for your task"""
     cfg = load_config()
     match task:
         case Task.REGRESSION:
-            build_regression_preprocessor(cfg)
+            return build_regression_preprocessor(cfg)
         case Task.CLASSIFICATION:
-            build_classification_preprocessor(cfg)
+            return build_classification_preprocessor(cfg)
         case Task.CLUSTERING:
-            build_clustering_preprocessor(cfg)
-        case _:
-            raise ValueError(f"Unknown task: {task}")
+            return build_clustering_preprocessor(cfg)
 
 def get_preprocessed_data(task: Task):
     """
@@ -126,7 +119,9 @@ def get_preprocessed_data(task: Task):
 def main():
     build_preprocessor(Task.CLUSTERING)
     t = get_preprocessed_data(Task.CLUSTERING)
-    print(type(t))
+    if type(t) != pd.DataFrame:
+        raise ValueError("wtf")
+    print(t.info())
 
 if __name__ == "__main__":
     main()

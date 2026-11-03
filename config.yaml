@@ -1,6 +1,6 @@
 paths:
   dataset: data/H2.csv
-seed: 100
+seed: 442004
 split:
   test_size: 0.2
 features:
@@ -14,5 +14,5 @@ features:
     categorical: []
   clustering:
     target: null
-    numerical: []
-    categorical: []
+    numerical: ["LeadTime","Adults","Children","Babies","ADR"]
+    categorical: ["ArrivalDateMonth","Meal"]
