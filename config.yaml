@@ -27,22 +27,11 @@ features:
       - ReservedRoomType
       - DepositType
       - CustomerType
-    drop:
-      - IsCanceled
-      - ReservationStatus
-      - ReservationStatusDate
-      - AssignedRoomType
-      - BookingChanges
-      - DaysInWaitingList
-      - RequiredCarParkingSpaces
-      - TotalOfSpecialRequests
   classification:
     target: null
     numerical: []
     categorical: []
-    drop: []
   clustering:
     target: null
     numerical: []
     categorical: []
-    drop: []

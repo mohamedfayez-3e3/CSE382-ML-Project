@@ -62,13 +62,21 @@ def split_data(df, task: Task, cfg):
         stratify=y if task == Task.CLASSIFICATION else None,
     )
 
-def build_regression_preprocessor(cfg):
+def build_regression_preprocessor(cfg) -> ColumnTransformer:
+    """Returns preprocessing pipeline for the regression model."""
+        
+    target, num, cat = get_feature_sets(Task.REGRESSION, cfg)
+
     return ColumnTransformer([])
 
-def build_classification_preprocessor(cfg):
+def build_classification_preprocessor(cfg) -> ColumnTransformer:
+    """Returns preprocessing pipeline for the classification model."""
+    
+    target, num, cat = get_feature_sets(Task.CLASSIFICATION, cfg)
+
     return ColumnTransformer([])
 
-def build_clustering_preprocessor(cfg, scale: bool = True):
+def build_clustering_preprocessor(cfg, scale: bool = True) -> ColumnTransformer:
     """Returns preprocessing pipeline for the clustering model."""
 
     _, num, cat = get_feature_sets(Task.CLUSTERING, cfg)
