@@ -56,6 +56,106 @@ Prediction point: booking time. Only fields known at booking are used.
 - Add regression-only row cleaning (ADR <= 0 and ADR > 1000)
 - Implement `build_regression_preprocessor`
 - Train the Linear Regression baseline and report MAE, RMSE, R2
+ Regression: Predicting Hotel ADR (Milestone 1)
+## DAY 2
+### Regression: Predicting Hotel ADR
+**Authors:** Seif and Rovan. The regression work (data, preprocessing, baseline, plots and documentation) was done jointly by both team members.
+
+This part of the project predicts the nightly price (**ADR**, average daily rate) of a hotel booking from the booking features in `data/H2.csv`.
+
+---
+
+## 1. Files
+
+```
+config.yaml                        # settings used by the regression scripts
+src/regression/
+├── data.py                        # load config + data, clean, split train/test
+├── preprocessor.py                # preprocessing of the features
+├── baseline.py                    # baseline model + 5-fold CV on the train set
+└── plots.py                       # EDA plots (saved as PNG)
+outputs/
+├── audit/lost_data.csv            # rows removed during cleaning
+├── regression_baseline_cv.csv     # baseline 5-fold CV results
+└── regression/
+    ├── adr_distribution.png
+    ├── adr_by_month.png
+    └── adr_by_room_type.png
+```
+
+---
+
+## 2. Setup
+
+Python 3.9+ and:
+
+```
+pip install pandas numpy scikit-learn matplotlib pyyaml
+```
+
+Run every command from the project root (the folder that contains `src/`), using `-m`.
+On Windows use `py -m ...`, elsewhere `python -m ...`.
+
+---
+
+## 3. Configuration (`config.yaml`)
+
+All settings (data path, target column, train/test split and seed, number of CV folds, cleaning options) are in `config.yaml` and read by `load_config()` in `data.py`, so nothing is hard-coded.
+## 4. What each step does
+
+### 4.1 Data loading and cleaning (data.py)
+- load_config() reads config.yaml.
+- load_regression_data(cfg) loads the data, cleans it, splits it into train and test, and returns X_train, X_test, y_train, y_test, log.
+- Rows removed during cleaning are written to outputs/audit/lost_data.csv, so every removal can be traced.
+- Target: *ADR*.
+
+
+
+### 4.2 Preprocessing (preprocessor.py)
+Prepares the features for modelling. It is fitted on the train data only, so no information leaks from the test set.
+
+### 4.3 Baseline (baseline.py)
+- Trains a baseline regression model on the *train set only*.
+- Evaluates it with *5-fold cross-validation*.
+- Saves the results to outputs/regression_baseline_cv.csv.
+
+>
+
+### 4.4 EDA plots (plots.py)
+All plots use the *train set only* and are saved in outputs/regression/.
+
+| File | Shows | Reading |
+|------|-------|---------|
+| adr_distribution.png | Histogram of ADR (50 bins) with a dashed line at the median (107.1) | Bell-shaped but right-skewed. Most bookings are between about 70 and 150, with a long tail up to about 300, a few extreme values near 450, and a few bookings near 0. Supports the cleaning decisions. |
+| adr_by_month.png | Mean ADR per arrival month | Shows seasonality of the price across the year. |
+| adr_by_room_type.png | Mean ADR per reserved room type | Shows how much the price depends on room type. |
+
+---
+
+## 5. How to run
+
+
+py -m src.regression.plots       # creates the 3 plots
+py -m src.regression.baseline    # runs the baseline + 5-fold CV
+
+
+
+Plots output:
+
+
+Saved: outputs/regression\adr_distribution.png
+Saved: outputs/regression\adr_by_month.png
+Saved: outputs/regression\adr_by_room_type.png
+
+
+---
+
+## 6. Evaluation rules
+
+- The test set is split once and *kept untouched* until final evaluation.
+- Preprocessing and model choices use *5-fold CV on the train set only*.
+- Test performance is not checked repeatedly while choosing preprocessing or hyperparameters.
+- Reported results come from the *CV numbers only*.
 
 ## TASK B CLASSIFICATION
 
@@ -126,52 +226,4 @@ The preprocessed datasets were imported into `src/classification/baseline.ipynb`
   - edit the features in config.yaml
   - change your `build_<task>_preprocessor()` in `preprocessing.py`
 
-# Regression: Predicting Hotel ADR (Milestone 1)
-
-**Authors:** Seif and Rovan. The regression work (data, preprocessing, baseline, plots and documentation) was done jointly by both team members.
-
-This part of the project predicts the nightly price (**ADR**, average daily rate) of a hotel booking from the booking features in `data/H2.csv`.
-
----
-
-## 1. Files
-
-```
-config.yaml                        # settings used by the regression scripts
-src/regression/
-├── data.py                        # load config + data, clean, split train/test
-├── preprocessor.py                # preprocessing of the features
-├── baseline.py                    # baseline model + 5-fold CV on the train set
-└── plots.py                       # EDA plots (saved as PNG)
-outputs/
-├── audit/lost_data.csv            # rows removed during cleaning
-├── regression_baseline_cv.csv     # baseline 5-fold CV results
-└── regression/
-    ├── adr_distribution.png
-    ├── adr_by_month.png
-    └── adr_by_room_type.png
-```
-
----
-
-## 2. Setup
-
-Python 3.9+ and:
-
-```
-pip install pandas numpy scikit-learn matplotlib pyyaml
-```
-
-Run every command from the project root (the folder that contains `src/`), using `-m`.
-On Windows use `py -m ...`, elsewhere `python -m ...`.
-
----
-
-## 3. Configuration (`config.yaml`)
-
-All settings (data path, target column, train/test split and seed, number of CV folds, cleaning options) are in `config.yaml` and read by `load_config()` in `data.py`, so nothing is hard-coded.
-
-> TODO: replace this sentence with the actual keys and values from `config.yaml`.
-
----
 
