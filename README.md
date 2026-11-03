@@ -156,6 +156,61 @@ Saved: outputs/regression\adr_by_room_type.png
 - Preprocessing and model choices use *5-fold CV on the train set only*.
 - Test performance is not checked repeatedly while choosing preprocessing or hyperparameters.
 - Reported results come from the *CV numbers only*.
+## Regression Models (Milestone 1)
+
+Predicts **ADR** from booking-time features only. Columns that are only known after
+the booking (cancellation status, reservation status, assigned room type, booking
+changes, etc.) are excluded to avoid target leakage. Exact duplicates are removed
+before the train/test split so identical bookings cannot appear in both sets.
+
+### Models
+Three model families, each evaluated as an untuned **baseline** and a
+hyperparameter-**tuned** configuration:
+
+| Model | Baseline | Tuned |
+|-------|----------|-------|
+| Linear Regression | `LinearRegression` | `Ridge` (tuned over `alpha`) |
+| Random Forest | default settings, 100 trees | random search over trees, depth, leaf size |
+| XGBoost | default settings | random search over trees, depth, learning rate, subsample |
+
+Plain Linear Regression has no hyperparameters, so Ridge is used as its tuned version.
+
+### Evaluation
+- **5-fold cross-validation on the training set only** (shuffled, fixed seed).
+- Preprocessing (imputation, scaling, one-hot encoding) is inside the pipeline, so it is
+  fitted on each fold's training part only (no leakage from the validation fold).
+- Tuning uses `RandomizedSearchCV` with CV RMSE as the selection criterion.
+- Metrics: **MAE, MSE, RMSE, R²**.
+
+### Cross-validation results
+
+| Model | Config | MAE | RMSE | R² |
+|-------|--------|-----|------|----|
+| Linear Regression | baseline | 15.843 | 22.058 | 0.693 |
+| Linear Regression | tuned (Ridge) | 15.843 | 22.057 | 0.693 |
+| Random Forest | baseline | 11.111 | 17.947 | 0.797 |
+| Random Forest | tuned | 11.183 | 17.898 | 0.798 |
+| XGBoost | baseline | 11.489 | 17.600 | 0.804 |
+| **XGBoost** | **tuned** | **10.869** | **17.026** | **0.817** |
+
+A Dummy model that predicts the mean gives R² = 0, MAE = 30.9, RMSE = 39.8.
+
+### Findings
+- Tree-based models clearly beat Linear Regression (R² about 0.80 vs 0.69), so the
+  relationship between ADR and the features is not purely linear.
+- Tuning helps XGBoost most. It barely changes Linear Regression and Random Forest.
+- For Random Forest, tuning lowered RMSE slightly but raised MAE slightly, because
+  models are selected by RMSE.
+- **Selected model: tuned XGBoost** (lowest CV RMSE).
+
+### Final test result
+The test set is used **once**, only for the selected model:
+
+
+### How to run
+py -m src.regression.models 5 # quick CV run (5 random-search candidates per model)
+py -m src.regression.models # full CV run (10 candidates), writes outputs/regression_cv_results.csv
+py -m src.regression.models final # evaluates the selected model once on the test set
 
 ## TASK B CLASSIFICATION
 
