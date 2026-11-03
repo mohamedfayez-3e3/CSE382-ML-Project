@@ -5,9 +5,28 @@ split:
   test_size: 0.2
 features:
   regression:
-    target: null
-    numerical: []
-    categorical: []
+    target: ADR
+    numerical:
+      - LeadTime
+      - ArrivalDateYear
+      - ArrivalDateWeekNumber
+      - ArrivalDateDayOfMonth
+      - StaysInWeekendNights
+      - StaysInWeekNights
+      - Adults
+      - Children
+      - Babies
+      - IsRepeatedGuest
+      - PreviousCancellations
+      - PreviousBookingsNotCanceled
+    categorical:
+      - ArrivalDateMonth
+      - Meal
+      - MarketSegment
+      - DistributionChannel
+      - ReservedRoomType
+      - DepositType
+      - CustomerType
   classification:
     target: null
     numerical: []

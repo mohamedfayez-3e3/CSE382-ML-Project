@@ -93,14 +93,13 @@ def build_clustering_preprocessor(cfg, scale: bool = True) -> ColumnTransformer:
 def build_preprocessor(task: Task) -> ColumnTransformer:
     """Returns a pipeline for your task"""
     cfg = load_config()
-    match task:
-        case Task.REGRESSION:
-            return build_regression_preprocessor(cfg)
-        case Task.CLASSIFICATION:
-            return build_classification_preprocessor(cfg)
-        case Task.CLUSTERING:
-            return build_clustering_preprocessor(cfg)
-
+    if task == Task.REGRESSION:
+        return build_regression_preprocessor(cfg)
+    elif task == Task.CLASSIFICATION:
+        return build_classification_preprocessor(cfg)
+    elif task == Task.CLUSTERING:
+        return build_clustering_preprocessor(cfg)
+    raise ValueError(f"Unknown task: {task}")    
 def get_preprocessed_data(task: Task):
     """
     For supervised tasks: returns (X_train, X_test, y_train, y_test)
