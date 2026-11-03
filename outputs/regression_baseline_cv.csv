@@ -1,0 +1,3 @@
+model,CV_MAE,CV_RMSE,CV_R2,CV_R2_std
+Dummy (mean),30.874,39.806,-0.0,0.0
+Linear Regression,15.843,22.058,0.693,0.009
