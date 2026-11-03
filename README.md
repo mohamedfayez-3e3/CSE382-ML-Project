@@ -126,3 +126,52 @@ The preprocessed datasets were imported into `src/classification/baseline.ipynb`
   - edit the features in config.yaml
   - change your `build_<task>_preprocessor()` in `preprocessing.py`
 
+# Regression: Predicting Hotel ADR (Milestone 1)
+
+**Authors:** Seif and Rovan. The regression work (data, preprocessing, baseline, plots and documentation) was done jointly by both team members.
+
+This part of the project predicts the nightly price (**ADR**, average daily rate) of a hotel booking from the booking features in `data/H2.csv`.
+
+---
+
+## 1. Files
+
+```
+config.yaml                        # settings used by the regression scripts
+src/regression/
+├── data.py                        # load config + data, clean, split train/test
+├── preprocessor.py                # preprocessing of the features
+├── baseline.py                    # baseline model + 5-fold CV on the train set
+└── plots.py                       # EDA plots (saved as PNG)
+outputs/
+├── audit/lost_data.csv            # rows removed during cleaning
+├── regression_baseline_cv.csv     # baseline 5-fold CV results
+└── regression/
+    ├── adr_distribution.png
+    ├── adr_by_month.png
+    └── adr_by_room_type.png
+```
+
+---
+
+## 2. Setup
+
+Python 3.9+ and:
+
+```
+pip install pandas numpy scikit-learn matplotlib pyyaml
+```
+
+Run every command from the project root (the folder that contains `src/`), using `-m`.
+On Windows use `py -m ...`, elsewhere `python -m ...`.
+
+---
+
+## 3. Configuration (`config.yaml`)
+
+All settings (data path, target column, train/test split and seed, number of CV folds, cleaning options) are in `config.yaml` and read by `load_config()` in `data.py`, so nothing is hard-coded.
+
+> TODO: replace this sentence with the actual keys and values from `config.yaml`.
+
+---
+
