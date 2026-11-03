@@ -1,0 +1,7 @@
+model,config,CV_MAE,CV_MSE,CV_RMSE,CV_R2,CV_R2_std,best_params
+Linear Regression,baseline,15.843,486.851,22.058,0.693,0.009,{}
+Linear Regression,tuned,15.843,486.818,22.057,0.693,0.009,"{""model__alpha"": 0.1}"
+Random Forest,baseline,11.111,322.432,17.947,0.797,0.01,{}
+Random Forest,tuned,11.183,320.693,17.898,0.798,0.009,"{""model__n_estimators"": 200, ""model__min_samples_leaf"": 3, ""model__max_depth"": 20}"
+XGBoost,baseline,11.489,310.02,17.6,0.804,0.007,{}
+XGBoost,tuned,10.869,290.107,17.026,0.817,0.006,"{""model__subsample"": 0.8, ""model__n_estimators"": 400, ""model__max_depth"": 7, ""model__learning_rate"": 0.1}"
