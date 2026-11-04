@@ -33,5 +33,5 @@ features:
     categorical: []
   clustering:
     target: null
-    numerical: ["LeadTime","Adults","Children","Babies","ADR"]
-    categorical: ["ArrivalDateMonth","Meal"]
+    numerical: ["LeadTime","Adults","Kids","ADR","StaysInWeekendNights","StaysInWeekNights","TotalOfSpecialRequests","PreviousCancellations","PreviousBookingsNotCanceled"]
+    categorical: ["ArrivalDateMonth","Meal","IsRepeatedGuest"]
