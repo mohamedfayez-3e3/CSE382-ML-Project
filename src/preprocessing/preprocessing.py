@@ -100,6 +100,7 @@ def build_preprocessor(task: Task) -> ColumnTransformer:
     elif task == Task.CLUSTERING:
         return build_clustering_preprocessor(cfg)
     raise ValueError(f"Unknown task: {task}")    
+
 def get_preprocessed_data(task: Task):
     """
     For supervised tasks: returns (X_train, X_test, y_train, y_test)

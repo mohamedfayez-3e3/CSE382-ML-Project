@@ -20,5 +20,9 @@ def main():
     metrics = clustering_metrics(X, labels)
     print(metrics)
 
+    out = df.copy()
+    out["cluster"] = labels
+    out.to_csv(ROOT / cfg["paths"]["outputs"]["clustering"] / "kmeans_clusters.csv", index=False)
+
 if __name__ == "__main__":
     main()
