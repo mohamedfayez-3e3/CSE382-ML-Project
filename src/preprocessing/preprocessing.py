@@ -27,6 +27,7 @@ def clean_rows(df: pd.DataFrame) -> pd.DataFrame:
 def add_features(df: pd.DataFrame) -> pd.DataFrame:
     """Adds extra features to use."""
     df = df.copy() # safety first
+    df["Kids"] = df["Children"] + df["Babies"]
     return df
 
 def get_feature_sets(task: Task, cfg, df = None):

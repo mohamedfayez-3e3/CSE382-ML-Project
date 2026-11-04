@@ -8,10 +8,10 @@ def main():
     cfg = load_config()
     df = pd.DataFrame(pp.get_preprocessed_data(Task.CLUSTERING))
     pipeline = pp.build_preprocessor(Task.CLUSTERING)
-
+    
     X = pipeline.fit_transform(df)
     km = KMeans(
-        n_clusters=4,
+        n_clusters=5,
         n_init=10,
         random_state=cfg["seed"]
     )
