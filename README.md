@@ -281,4 +281,11 @@ The preprocessed datasets were imported into `src/classification/baseline.ipynb`
   - edit the features in config.yaml
   - change your `build_<task>_preprocessor()` in `preprocessing.py`
 
-
+## Classification
+- Target: IsCanceled. Dropped ReservationStatus and ReservationStatusDate to avoid data leakage.
+- Stratified 80/20 split, with imputation, scaling and one-hot encoding in a pipeline.
+- Models compared: Logistic Regression and Random Forest.
+- Logistic Regression: accuracy = 0.8255, F1 = 0.7775, ROC-AUC = 0.9098.
+- Random Forest: accuracy = 0.8901, F1 = 0.8617, ROC-AUC = 0.9592.
+- Best model: Random Forest. Full results in outputs/classification/metrics.json.
+- Note: duplicate rows were not removed, so scores may be slightly optimistic.
