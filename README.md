@@ -256,39 +256,6 @@ The preprocessing steps were implemented manually in `src/classification/preproc
      - `data/train_preprocessed.csv`
      - `data/test_preprocessed.csv`
 
-### Baseline Data Loading
-
-The preprocessed datasets were imported into `src/classification/baseline.ipynb`:
-
-- Loaded `train_preprocessed.csv` and `test_preprocessed.csv` using Pandas.
-- Separated the input features (`X_train`, `X_test`) from the target variable (`y_train`, `y_test`).
-
-**Final Dataset Shapes:**
-- Training features: 63,464 rows × 213 features.
-- Testing features: 15,866 rows × 213 features.
-- Training target: 63,464 values.
-- Testing target: 15,866 values.
-
-
-## Preprocessing
-
-- All data preparation lives in `src/preprocessing/preprocessing.py`, and all settings live in `config.yaml` (paths, seed, split size, cleaning thresholds, and the feature lists per task).
-
-- To get data for a task, call `get_preprocessing_data(Task.<task>)`.
-- To get the pipeline for a task, call `build_preprocessor(Task.<task>`.
-
-- Your edits should be one of the two:
-  - edit the features in config.yaml
-  - change your `build_<task>_preprocessor()` in `preprocessing.py`
-
-##  TASK B Classification
-- Target: IsCanceled. Dropped ReservationStatus and ReservationStatusDate to avoid data leakage.
-- Stratified 80/20 split, with imputation, scaling and one-hot encoding in a pipeline.
-- Models compared: Logistic Regression and Random Forest.
-- Logistic Regression: accuracy = 0.8255, F1 = 0.7775, ROC-AUC = 0.9098.
-- Random Forest: accuracy = 0.8901, F1 = 0.8617, ROC-AUC = 0.9592.
-- Best model: Random Forest. Full results in outputs/classification/metrics.json.
-- Note: duplicate rows were not removed, so scores may be slightly optimistic.
 
 ### Baseline Model Interpretation
 
