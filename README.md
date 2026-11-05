@@ -281,7 +281,7 @@ The preprocessed datasets were imported into `src/classification/baseline.ipynb`
   - edit the features in config.yaml
   - change your `build_<task>_preprocessor()` in `preprocessing.py`
 
-## Classification
+##  TASK B Classification
 - Target: IsCanceled. Dropped ReservationStatus and ReservationStatusDate to avoid data leakage.
 - Stratified 80/20 split, with imputation, scaling and one-hot encoding in a pipeline.
 - Models compared: Logistic Regression and Random Forest.
@@ -289,3 +289,43 @@ The preprocessed datasets were imported into `src/classification/baseline.ipynb`
 - Random Forest: accuracy = 0.8901, F1 = 0.8617, ROC-AUC = 0.9592.
 - Best model: Random Forest. Full results in outputs/classification/metrics.json.
 - Note: duplicate rows were not removed, so scores may be slightly optimistic.
+
+### Baseline Model Interpretation
+
+The Logistic Regression baseline achieved an accuracy of **76.61%** on the testing dataset.
+
+#### Key Findings
+
+- **Accuracy (76.61%):** The model correctly classified approximately 76.61% of the test bookings.
+- **Precision (77.15%):** When the model predicted that a booking would be canceled, approximately 77.15% of those predictions were correct.
+- **Recall (62.43%):** The model identified approximately 62.43% of all bookings that were actually canceled.
+- **F1-Score (69.02%):** This score reflects the balance between Precision and Recall.
+
+#### Confusion Matrix Analysis
+
+The confusion matrix produced the following results:
+
+| Category | Count |
+|---|---:|
+| True Negative (TN) | 8,022 |
+| False Positive (FP) | 1,224 |
+| False Negative (FN) | 2,487 |
+| True Positive (TP) | 4,133 |
+
+#### Strengths
+
+- Achieved a reasonable initial accuracy of 76.61%.
+- Correctly identified 8,022 non-canceled bookings.
+- When predicting cancellation, approximately 77.15% of predictions were correct.
+
+#### Weaknesses
+
+- The Recall score (62.43%) indicates that the model missed a considerable number of actual cancellations.
+- The model incorrectly classified 2,487 canceled bookings as non-canceled (False Negatives).
+- The difference between Precision and Recall indicates that the model is better at making reliable cancellation predictions than identifying all actual cancellations.
+
+#### Conclusion
+
+Logistic Regression provides a useful baseline for the hotel booking cancellation classification task. Although it achieved 76.61% accuracy, its relatively lower Recall indicates room for improvement in identifying canceled bookings.
+
+These results will serve as a reference point for evaluating and comparing other classification models.
